@@ -1,0 +1,21 @@
+<div class="row justify-content-center py-5">
+  <div class="col-md-8">
+    <div class="card border-danger shadow-sm">
+      <div class="card-header bg-danger text-white fw-bold">
+        <i class="bi bi-shield-x me-2"></i>Đã xảy ra lỗi hệ thống
+      </div>
+      <div class="card-body p-4 text-center">
+        <h4 class="card-title text-danger mb-3">Thông báo lỗi cơ sở dữ liệu / phân quyền</h4>
+        <div class="alert alert-warning text-start">
+          <code>{{message}}</code>
+        </div>
+        <p class="text-muted small">
+          Vui lòng kiểm tra lại chuỗi kết nối MongoDB Atlas (Biến môi trường <code>MONGO_URI_READ</code> và <code>MONGO_URI_WRITE</code>) cùng với quyền người dùng <strong>user_read_23IT055</strong> và <strong>user_write_23IT055</strong>.
+        </p>
+        <a href="/" class="btn btn-outline-danger mt-3">
+          <i class="bi bi-arrow-left me-1"></i>Quay lại trang chủ
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
