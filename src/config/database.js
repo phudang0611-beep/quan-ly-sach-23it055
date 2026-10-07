@@ -12,6 +12,11 @@ const mongoose = require('mongoose');
 const MONGO_URI_READ = process.env.MONGO_URI_READ || 'mongodb://localhost:27017/DB_23IT055_read';
 const MONGO_URI_WRITE = process.env.MONGO_URI_WRITE || 'mongodb://localhost:27017/DB_23IT055_write';
 
+if (!process.env.MONGO_URI_READ || process.env.MONGO_URI_READ.includes('<password>')) {
+  console.warn('\n⚠️  [LƯU Ý]: Bạn chưa điền chuỗi kết nối MongoDB Atlas thật vào file .env!');
+  console.warn('👉 Hãy mở file .env và thay thế <password> cùng địa chỉ cluster của bạn.\n');
+}
+
 // Tạo kết nối riêng biệt cho luồng ĐỌC (Read Stream)
 const readConnection = mongoose.createConnection(MONGO_URI_READ, {
   serverSelectionTimeoutMS: 5000,
