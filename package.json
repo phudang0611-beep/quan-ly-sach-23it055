@@ -1,0 +1,28 @@
+{
+  "name": "quan-ly-sach-23it055",
+  "version": "1.0.0",
+  "description": "Ung dung Quan ly Sach - Bai thi Giua ki Dien toan Dam may - Sinh vien: Le Phu Dang - MSSV: 23IT055",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "cloud-computing",
+    "mongodb-atlas",
+    "least-privilege",
+    "stateless",
+    "devops",
+    "23IT055"
+  ],
+  "author": "Le Phu Dang - 23IT055",
+  "license": "ISC",
+  "dependencies": {
+    "connect-mongo": "^5.1.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-handlebars": "^8.0.1",
+    "express-session": "^1.18.1",
+    "mongoose": "^8.9.5"
+  }
+}
