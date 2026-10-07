@@ -5,7 +5,7 @@
 - **Mã số sinh viên (MSSV):** 23IT055
 - **3 số cuối MSSV:** `055` (Tiền tố bắt buộc cho Mã Sách)
 - **Chữ số cuối MSSV:** `5`
-- **Mức thuế suất VAT:** `VAT = (Chữ số cuối MSSV + 5)% = (5 + 5)% = 10%`
+- **Mức thuế suất VAT:** `VAT = (Chữ số cuối MSSV + 4)% = (5 + 4)% = 9%`
 - **Tên cơ sở dữ liệu MongoDB Atlas:** `DB_23IT055`
 
 ---
@@ -28,10 +28,10 @@
   - Tuyệt đối **không lưu Session/Cookie trong RAM máy chủ** (MemoryStore), đảm bảo khi ứng dụng nhân bản nhiều bản sao (Multi-instance / Horizontal Pod Autoscaling) thì phiên làm việc của người dùng không bị mất.
 - **Thuật toán cá nhân hóa:**
   - **Bộ lọc mã sản phẩm:** Bắt buộc có tiền tố là 3 số cuối MSSV: `055`. Nếu người dùng nhập mã không bắt đầu bằng `055` (ví dụ: `BK01` hoặc `123-BK`), hệ thống lập tức từ chối và thông báo lỗi.
-  - **Thuế suất VAT:** Tự động tính theo công thức `(5 + 5)% = 10%`.
-  - **Giá sau thuế:** Hệ thống tự động tính `priceWithVAT = price * 1.10` trước khi lưu vào Cloud MongoDB Atlas.
+  - **Thuế suất VAT:** Tự động tính theo công thức `(5 + 4)% = 9%`.
+  - **Giá sau thuế:** Hệ thống tự động tính `priceWithVAT = price * 1.09` trước khi lưu vào Cloud MongoDB Atlas.
   - **Handlebars:** Render giao diện chuẩn Bootstrap 5, Footer cố định hiển thị:
-    `Họ và tên: Lê Phú Đẳng | MSSV: 23IT055 | Mức VAT áp dụng: 10%`.
+    `Họ và tên: Lê Phú Đẳng | MSSV: 23IT055 | Mức VAT áp dụng: 9%`.
 
 ### 1.3. Quản lý mã nguồn & Kiểm soát DevOps
 - Khởi tạo Git, cấu hình `.gitignore` nghiêm ngặt ngăn chặn rò rỉ `.env`, thư mục `node_modules` và log.

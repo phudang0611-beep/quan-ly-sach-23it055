@@ -31,7 +31,7 @@ const bookSchema = new mongoose.Schema(
     },
     vatRate: {
       type: Number,
-      default: 10, // VAT = (Chữ số cuối MSSV + 5)% = (5 + 5)% = 10%
+      default: 9, // VAT = (Chữ số cuối MSSV + 4)% = (5 + 4)% = 9%
     },
     priceWithVAT: {
       type: Number,

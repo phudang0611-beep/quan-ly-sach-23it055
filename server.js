@@ -7,7 +7,7 @@
  * 2. Stateless Session: Quản lý phiên tập trung qua MongoStore trên MongoDB Atlas (Auto-scaling ready)
  * 3. Thuật toán cá nhân hóa:
  *    - Bộ lọc mã sản phẩm: Tiền tố bắt buộc là 3 số cuối MSSV (055)
- *    - Thuế suất: VAT = (Chữ số cuối MSSV + 5)% = (5 + 5)% = 10%
+ *    - Thuế suất: VAT = (Chữ số cuối MSSV + 4)% = (5 + 4)% = 9%
  * 4. Handlebars Template Engine với Footer bắt buộc hiển thị Họ tên, MSSV, mức VAT.
  */
 

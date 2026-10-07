@@ -46,7 +46,7 @@
             <strong>Quy tắc Mã SP:</strong> Bắt buộc bắt đầu bằng <span class="badge bg-danger">055</span> (3 số cuối MSSV 23IT055).
           </div>
           <div>
-            <strong>Thuế suất VAT:</strong> <code>(5 + 5)% = 10%</code> (Tính tự động trước khi lưu đám mây).
+            <strong>Thuế suất VAT:</strong> <code>(5 + 4)% = 9%</code> (Tính tự động trước khi lưu đám mây).
           </div>
         </div>
       </div>
@@ -157,7 +157,7 @@
           <div class="p-3 mb-3 bg-light rounded border">
             <div class="d-flex justify-content-between small text-muted mb-1">
               <span>Mức thuế VAT áp dụng:</span>
-              <strong class="text-danger">10% (Chữ số cuối MSSV: 5 + 5)%</strong>
+              <strong class="text-danger">9% (Chữ số cuối MSSV: 5 + 4)%</strong>
             </div>
             <div class="d-flex justify-content-between small">
               <span class="fw-semibold">Giá sau thuế dự kiến:</span>
@@ -248,7 +248,7 @@
     priceInput.addEventListener('input', function() {
       const val = parseFloat(this.value);
       if (!isNaN(val) && val >= 0) {
-        const vatPrice = Math.round(val * 1.10);
+        const vatPrice = Math.round(val * 1.09);
         previewVat.textContent = vatPrice.toLocaleString('vi-VN') + ' đ';
       } else {
         previewVat.textContent = '0 đ';

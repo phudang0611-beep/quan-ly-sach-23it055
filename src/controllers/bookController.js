@@ -11,7 +11,7 @@ const STUDENT_INFO = {
   studentId: '23IT055',
   lastThreeDigits: '055', // 3 số cuối MSSV (dùng làm tiền tố mã sản phẩm)
   lastDigit: 5,           // Chữ số cuối MSSV
-  vatRate: 5 + 5,         // VAT = (Chữ số cuối MSSV + 5)% = (5 + 5)% = 10%
+  vatRate: 5 + 4,         // VAT = (Chữ số cuối MSSV + 4)% = (5 + 4)% = 9%
 };
 
 /**
@@ -84,8 +84,8 @@ const createBook = async (req, res) => {
       return res.redirect('/');
     }
 
-    // 3. Thuật toán cá nhân hóa: Tính thuế suất VAT động = (Chữ số cuối MSSV + 5)%
-    // MSSV 23IT055 -> số cuối = 5 -> VAT = 10%
+    // 3. Thuật toán cá nhân hóa: Tính thuế suất VAT động = (Chữ số cuối MSSV + 4)%
+    // MSSV 23IT055 -> số cuối = 5 -> VAT = 9%
     const vatRate = STUDENT_INFO.vatRate;
     const priceWithVAT = Math.round(basePrice * (1 + vatRate / 100));
 
