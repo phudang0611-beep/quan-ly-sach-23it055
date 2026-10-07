@@ -1,0 +1,258 @@
+<!-- Header & Cloud Info Cards -->
+<div class="row g-3 mb-4">
+  <!-- Card 1: Kiến trúc Đám mây & Bảo mật Least Privilege -->
+  <div class="col-lg-6">
+    <div class="card h-100 shadow-sm border-0 border-start border-primary border-4">
+      <div class="card-body">
+        <h5 class="card-title text-primary fw-bold">
+          <i class="bi bi-shield-lock-fill me-2"></i>Bảo mật Least Privilege (MongoDB Atlas)
+        </h5>
+        <ul class="list-unstyled mb-0 small">
+          <li class="mb-1">
+            <strong>Cơ sở dữ liệu:</strong> <code class="text-danger">DB_23IT055</code>
+          </li>
+          <li class="mb-1">
+            <strong>Tài khoản Đọc (Read Stream):</strong> <span class="badge bg-info text-dark">user_read_23IT055</span> (Quyền <code>read</code>)
+          </li>
+          <li class="mb-1">
+            <strong>Tài khoản Ghi (Write Stream):</strong> <span class="badge bg-warning text-dark">user_write_23IT055</span> (Quyền <code>readWrite</code>)
+          </li>
+          <li>
+            <strong>Cơ chế định tuyến:</strong> Hệ thống tự động chuyển tiếp luồng GET &rarr; Read Connection và POST &rarr; Write Connection.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2: Stateless Session & Thuật toán Cá nhân hóa -->
+  <div class="col-lg-6">
+    <div class="card h-100 shadow-sm border-0 border-start border-success border-4">
+      <div class="card-body">
+        <h5 class="card-title text-success fw-bold">
+          <i class="bi bi-cloud-check-fill me-2"></i>Stateless Session &amp; Cá nhân hóa
+        </h5>
+        <div class="small">
+          <div class="mb-1">
+            <strong>Stateless Session:</strong> Lưu tập trung tại MongoDB Atlas (Collection <code>sessions</code>, KHÔNG lưu RAM).
+          </div>
+          <div class="mb-1">
+            <strong>Session ID hiện tại:</strong> <span class="session-badge">{{sessionID}}</span>
+          </div>
+          <div class="mb-1">
+            <strong>Số lần tương tác phiên:</strong> <span class="badge bg-secondary">{{visitCount}} lần</span>
+          </div>
+          <div class="mb-1">
+            <strong>Quy tắc Mã SP:</strong> Bắt buộc bắt đầu bằng <span class="badge bg-danger">055</span> (3 số cuối MSSV 23IT055).
+          </div>
+          <div>
+            <strong>Thuế suất VAT:</strong> <code>(5 + 5)% = 10%</code> (Tính tự động trước khi lưu đám mây).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Flash Messages -->
+{{#if successMsg}}
+<div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+  <i class="bi bi-check-circle-fill me-2"></i><strong>Thành công!</strong> {{successMsg}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+{{#if errorMsg}}
+<div class="alert alert-danger alert-dismissible fade show shadow-sm" role="alert">
+  <i class="bi bi-exclamation-triangle-fill me-2"></i><strong>Lỗi xử lý!</strong> {{errorMsg}}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{{/if}}
+
+<div class="row g-4">
+  <!-- Cột Trái: Form Thêm Sách Mới (Luồng GHI) -->
+  <div class="col-lg-4">
+    <div class="card shadow-sm border-0">
+      <div class="card-header card-header-custom py-3">
+        <h5 class="card-title mb-0 fw-bold">
+          <i class="bi bi-plus-circle me-2"></i>Thêm Sách Mới
+        </h5>
+        <small class="text-light opacity-75">Tự động định tuyến qua luồng GHI (user_write_23IT055)</small>
+      </div>
+      <div class="card-body p-4">
+        <form action="/books" method="POST" id="addBookForm">
+          <div class="mb-3">
+            <label for="bookCode" class="form-label fw-semibold">
+              Mã Sách <span class="text-danger">*</span>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="bookCode"
+              name="bookCode"
+              placeholder="Ví dụ: 055-BK01"
+              required
+            >
+            <div class="form-text text-danger">
+              <i class="bi bi-info-circle me-1"></i>Bắt buộc có tiền tố là <strong>055</strong> (3 số cuối MSSV).
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="title" class="form-label fw-semibold">
+              Tên Sách <span class="text-danger">*</span>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="title"
+              name="title"
+              placeholder="Nhập tên sách..."
+              required
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="author" class="form-label fw-semibold">
+              Tác Giả <span class="text-danger">*</span>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="author"
+              name="author"
+              placeholder="Nhập tác giả..."
+              required
+            >
+          </div>
+
+          <div class="mb-3">
+            <label for="category" class="form-label fw-semibold">Thể Loại</label>
+            <select class="form-select" id="category" name="category">
+              <option value="Công nghệ thông tin">Công nghệ thông tin</option>
+              <option value="Điện toán đám mây">Điện toán đám mây</option>
+              <option value="Khoa học dữ liệu">Khoa học dữ liệu</option>
+              <option value="Kinh tế & Quản trị">Kinh tế & Quản trị</option>
+              <option value="Văn học nghệ thuật">Văn học nghệ thuật</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="price" class="form-label fw-semibold">
+              Giá Gốc (VNĐ) <span class="text-danger">*</span>
+            </label>
+            <input
+              type="number"
+              class="form-control"
+              id="price"
+              name="price"
+              min="0"
+              step="1000"
+              placeholder="Ví dụ: 100000"
+              required
+            >
+          </div>
+
+          <!-- Preview tự động VAT & Giá sau thuế -->
+          <div class="p-3 mb-3 bg-light rounded border">
+            <div class="d-flex justify-content-between small text-muted mb-1">
+              <span>Mức thuế VAT áp dụng:</span>
+              <strong class="text-danger">10% (Chữ số cuối MSSV: 5 + 5)%</strong>
+            </div>
+            <div class="d-flex justify-content-between small">
+              <span class="fw-semibold">Giá sau thuế dự kiến:</span>
+              <strong class="text-primary fs-6" id="previewPriceWithVat">0 đ</strong>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 fw-bold py-2 shadow-sm">
+            <i class="bi bi-cloud-arrow-up-fill me-1"></i>Lưu Sách Lên Cloud
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cột Phải: Bảng Danh Sách Sách (Luồng ĐỌC) -->
+  <div class="col-lg-8">
+    <div class="card shadow-sm border-0">
+      <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+        <div>
+          <h5 class="card-title mb-0 fw-bold text-dark">
+            <i class="bi bi-collection-fill text-primary me-2"></i>Danh Sách Sách Trên Hệ Thống
+          </h5>
+          <small class="text-muted">Định tuyến tự động qua luồng ĐỌC (user_read_23IT055)</small>
+        </div>
+        <span class="badge bg-primary fs-6 px-3 py-2">
+          Tổng số: {{books.length}} cuốn
+        </span>
+      </div>
+      <div class="card-body p-0">
+        {{#if books.length}}
+        <div class="table-responsive">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+              <tr>
+                <th scope="col" class="ps-3">Mã Sách</th>
+                <th scope="col">Tên Sách</th>
+                <th scope="col">Tác Giả</th>
+                <th scope="col">Thể Loại</th>
+                <th scope="col" class="text-end">Giá Gốc</th>
+                <th scope="col" class="text-center">VAT</th>
+                <th scope="col" class="text-end pe-3">Giá Sau Thuế</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each books}}
+              <tr>
+                <td class="ps-3">
+                  <span class="badge bg-secondary font-monospace">{{this.bookCode}}</span>
+                </td>
+                <td class="fw-semibold text-dark">{{this.title}}</td>
+                <td class="text-secondary">{{this.author}}</td>
+                <td>
+                  <span class="badge bg-light text-dark border">{{this.category}}</span>
+                </td>
+                <td class="text-end font-monospace text-muted">
+                  {{this.price}} đ
+                </td>
+                <td class="text-center">
+                  <span class="badge bg-danger">{{this.vatRate}}%</span>
+                </td>
+                <td class="text-end pe-3 font-monospace fw-bold text-primary">
+                  {{this.priceWithVAT}} đ
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+        {{else}}
+        <div class="text-center py-5 text-muted">
+          <i class="bi bi-inbox fs-1 d-block mb-3 text-secondary opacity-50"></i>
+          <h5>Chưa có dữ liệu sách nào trong Cloud Database</h5>
+          <p class="small">Hãy thêm cuốn sách đầu tiên bằng biểu mẫu bên trái (Mã sách bắt đầu bằng tiền tố <code>055</code>).</p>
+        </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Script tính nhẩm giá sau thuế trực tiếp trên client -->
+<script>
+  const priceInput = document.getElementById('price');
+  const previewVat = document.getElementById('previewPriceWithVat');
+
+  if (priceInput && previewVat) {
+    priceInput.addEventListener('input', function() {
+      const val = parseFloat(this.value);
+      if (!isNaN(val) && val >= 0) {
+        const vatPrice = Math.round(val * 1.10);
+        previewVat.textContent = vatPrice.toLocaleString('vi-VN') + ' đ';
+      } else {
+        previewVat.textContent = '0 đ';
+      }
+    });
+  }
+</script>
